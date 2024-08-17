@@ -14,7 +14,7 @@
     "processing",
     "nextjs"
   ],
-  "author": "Your Name",
+  "author": "Saravana Rathinam",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1"

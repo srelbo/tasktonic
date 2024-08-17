@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.nginx
+    ports:
+      - '80:80'
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - backend
+      - redis
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.server
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - redis
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.worker
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:6-alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:

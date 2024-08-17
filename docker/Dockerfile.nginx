@@ -1,0 +1,15 @@
+FROM openresty/openresty:alpine-fat
+
+# Install Redis and JWT Lua libraries
+RUN /usr/local/openresty/luajit/bin/luarocks install lua-resty-redis && \
+    /usr/local/openresty/luajit/bin/luarocks install lua-resty-jwt
+
+# Copy Nginx configuration
+COPY docker/nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
+
+# Copy Lua scripts
+COPY docker/lua /usr/local/openresty/nginx/lua
+
+EXPOSE 80
+
+CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
