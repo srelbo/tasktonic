@@ -107,7 +107,27 @@ For detailed documentation, please refer to:
 
 - [Client Documentation](packages/client/README.md)
 - [Worker Documentation](packages/worker/README.md)
-- [Server Documentation](server/README.md)
+- [System Architecture ](system-architecture.md)
+
+## Why We Built Task Tonic This Way
+
+We created Task Tonic with a few simple goals in mind:
+
+1. **Keep it simple**: We used tech that most devs already know - Next.js, Redis, and Nginx. This means it's easier to understand and fix if something goes wrong.
+
+2. **Save money**: We know serverless can get expensive if functions run too long. So, we moved the heavy lifting to separate workers and use Redis to quickly fetch data. This keeps your server functions short and cheap.
+
+3. **Easy to manage**: We use Docker, which makes it super easy to set up and update Task Tonic. You can also add or change parts without messing up the whole system.
+
+4. **Real-time updates**: We use WebSockets and Redis pub/sub to give you instant updates. This means your app feels snappy and responsive, without overloading your server.
+
+5. **Grows with you**: Need to handle more tasks? Just add more workers. Need to support more users? Scale up your Next.js servers. It's that easy.
+
+6. **Keeps things safe**: We handle security upfront with JWT auth in Nginx and keep each user's data separate in Redis. It's not an afterthought - it's baked in from the start.
+
+7. **Dev-friendly**: We've made a simple client library and straightforward APIs. This means you can add long-running tasks to your Next.js apps without wrestling with complex setups.
+
+In short, we've tried to make Task Tonic powerful enough to handle tough jobs, but simple enough that you're not pulling your hair out trying to use it. It's all about making your life easier while keeping your app fast and your bills low.
 
 ## Contributing
 
