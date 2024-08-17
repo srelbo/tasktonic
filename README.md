@@ -4,7 +4,7 @@ A distributed task queue for ML workloads. This is a work in progress.
 
 ## What is it?
 
-Task tonic is a task queing system for serverless workloads. 
+Task tonic is a task queuing system for serverless workloads.
 
 ## Features
 
